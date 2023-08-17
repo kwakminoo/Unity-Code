@@ -73,7 +73,106 @@ void Update()
 </code>  
 </pre>
 
+발사체 날리기
+-------------
+<pre>
+<code>
+public float speed = 발사체 속도;
+
+void Update()
+  {
+    trnasform.Translate(Vector3.forward * Time.deltaTime * speed);
+  }
+</code>
+</pre>
+
 키를 눌러 발살체 발사
 ---------------
+<pre>
+<code>
+void Update()
+  {
+    //GetKey, GetKeyUp, GetKeyDown 등을 이용함, KeyCode.플레이어가 누를 키 이름을 입력
+    if (Input.GetKeyDown(KeyCode.Space))
+      {
+        Instantiate(프로젝트프리펩, transform.position, 프로젝트프리펨.transfrom.rotation);
+      }
+  }
+</code>
+</pre>
+
+
+화면을 벗어난 오브젝트 제거
+-
+<pre>
+<code>
+private float 변수 = 위치 수;
+
+void Update()
+  {
+    if (transfrom.position.축 > 변수)
+    {
+      Destroy(gameObject);
+    } else if (transfrom.position.축 < 변수)
+      {
+        Destroy(gameObject);
+      }
+  }
+</code>
+</pre>
+
+
+배열로 무작위 오브젝트 생성
+-
+<pre>
+<code>
+public GameObject [] 이름프리펩;
+private float 스폰축 = 위치;
+
+void Update()
+  {
+    if (Input.GetKeyDown(KeyCode.누를 키))
+    {
+      스폰랜덤이름();
+    }
+void 스폰랜덤이름();
+    {
+      int 이름인덱스 = Random.Range(0, 이름인덱스.Length);
+      Vector3 스폰이름 = new Vector3(Random.Range(-스폰축, 스폰축), y, 스폰이름);
+      Instantiate(이름프리펩[이름인덱스], 스폰이름, 이름프리펩[이름인덱스].transform.rotation);
+    }
+  }
+</code>
+</pre>
+
+일정시간 간격으로 오브젝트 생성
+-
+<pre>
+<code>
+public float startDelay = 딜레이 시간;
+public float spawnInterval = 스폰 시간;
+
+void start()
+  {
+    InvokeRepeating("스폰랜덤이름", startDelay, spawnInterval);
+  }
+</code>
+</pre>
+
+충돌 시 오브젝트 파괴
+-
+<pre>
+<code>
+void OnTriggerEnter(Collider.other)
+  {
+    //충돌시 콜라이더가 지정된 오브젝트와 그 오브젝트와 부딛힌 오브젝트 둘다 파괴
+    Destroy.(gameObject);
+    Destroy.(other.gameObject);
+  }
+</code>
+</pre>
+
+
+
 
   
