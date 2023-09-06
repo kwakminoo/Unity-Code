@@ -122,13 +122,19 @@ void Update()
 </pre>
 
 
-배열로 무작위 오브젝트 생성
+배열로 무작위 위치에 오브젝트 생성
 -
 <pre>
 <code>
 public GameObject [] 이름프리펩;
 private float 스폰축 = 위치;
+public float startDelay = 딜레이 시간;
+public float spawnInterval = 스폰 시간;
 
+void start()
+  {
+    InvokeRepeating("이름프리펩", startDelay, spawnInterval);
+  }
 void Update()
   {
     if (Input.GetKeyDown(KeyCode.누를 키))
@@ -145,17 +151,24 @@ void 스폰랜덤이름();
 </code>
 </pre>
 
-일정시간 간격으로 오브젝트 생성
+특정위치에 오브젝트 생성
 -
 <pre>
 <code>
+public GameObject 스폰이름
+private Vector3 spawnPos = new Vector3(x, y, z);
 public float startDelay = 딜레이 시간;
 public float spawnInterval = 스폰 시간;
 
 void start()
   {
-    InvokeRepeating("스폰랜덤이름", startDelay, spawnInterval);
+    InvokeRepeating("오브젝트스폰이름", startDelay, spawnInterval);
   }
+
+void 오브젝트스폰이름()
+{
+  Instantiate(스폰이름, spawnPos, 스폰이름.transform.rotation);
+}
 </code>
 </pre>
 
@@ -172,7 +185,38 @@ void OnTriggerEnter(Collider.other)
 </code>
 </pre>
 
+키를 눌러 점프 / 2단점프 방지 
+-
+<pre>
+<code>
+private Rigidbody playerRb;
+//점프력과 중력 값 선언
+public float jumpForce;
+public float gravityModifier;
+//땅에 뭍어있을 때만 점프 가능하도록 변수 선언
+private bool inOnGround = true
 
+void start()
+{
+  playerRb = GetComponent<Rigidbody>();
+  Physics.gravity *= gravityModifier;
+}
+
+void update()
+{
+  if(Input.GetKeyDown(KeyCode.Space) && inOnGround)
+    {
+      playerRbAddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+      isOnGround = false;
+    }
+}
+
+private void OnCollisionEnter(Conllision collision)
+{
+  isOnGround = true;
+}
+</code>
+</pre>
 
 
   
