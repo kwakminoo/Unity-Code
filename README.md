@@ -218,5 +218,20 @@ private void OnCollisionEnter(Conllision collision)
 </code>
 </pre>
 
+인스펙터 참조하기
+-
+<pre>
+<code>
+  GetComponent<참조할 인스펙터 이름>();
+</code>
+</pre>
+
+문자출력
+-
+<pre>
+<code>
+  Debug.Log("문자");
+</code>
+</pre>
 
   
