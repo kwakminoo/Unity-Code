@@ -234,4 +234,26 @@ private void OnCollisionEnter(Conllision collision)
 </code>
 </pre>
 
+파티클 플레이
+-
+<pre>
+<code>
+  pubic ParticleSystem 파티클이름변수;
+  
+  //play, playOneShot 등이 가능
+  파티클이름변수.play();
+</code>
+</pre>
+
+이펙트 오디오 출력
+-
+<pre>
+<code>
+  private AudioSource 사운드이름변수; 
+  public AudioClip 오디오클립이름변수;
+
+  //뒤에 숫자는 1.0f = 100%를 뜻함 2.0f는 200%를 뜻함 
+  사운드이름변수.PlayOneShot(오디오클립이름변수;, 1.0f);
+</code>
+</pre>
   
