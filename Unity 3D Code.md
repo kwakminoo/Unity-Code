@@ -1,4 +1,4 @@
-# Unity-Code
+# Unity-3D Code
 
 
 플레이어 이동
@@ -12,7 +12,7 @@ private float forwardInput;
 
 void Update()
 {
-  //키보드 w,a,s,d로 움직인다 라는 것을 불러옴
+  //Horizontal은 키보드 좌,우(a,d) Vertical은 키보드 앞 뒤(w,s)를 불러옴
   horizontalInput = Input.GetAxis("Horizontal");
   forwardInput = Input.GetAxis("Vertical");
 
@@ -256,4 +256,49 @@ private void OnCollisionEnter(Conllision collision)
   사운드이름변수.PlayOneShot(오디오클립이름변수;, 1.0f);
 </code>
 </pre>
+
+리지드바디를 이용한 플레이어 움직임
+-
+<pre>
+private Rigidbody playerRb;
+public float speed;
+
+void Start()
+{
+  playerRb = GetComponent<Rigidbody>();
+}
+
+void Update()
+{
+  float forwardInput = Input.GetAxis("Vertical");
+  float horizontalInput = Input.GetAxis("Horizontal");
+
+  playerRb.AddForce(Vector3.forward * forwardInput * speed);
+  playerRb.AddForce(Vector3.left * horizontalInput * speed);
+}
+</pre>
+
+포컬포인트가 바라보는 방향에 따라 움직이기
+-
+<pre>
+private GameObject focalPoint;
+private Rigidbody playerRb;
+
+void Start()
+{
+  playerRb = GetComponent<Rigidbody>();
+  focalPoint = GameObject.Find("Focal Point");
+}
+
+void Update()
+{
+  float forwardInput = Input.GetAxis("Vertical");
+  float horizontalInput = Input.GetAxis("Horizontal");
+
+  playerRb.AddForce(focalPoint.transform.forward * forwardInput * speed);
+  playerRb.AddForce(focalPoint.transform.left * horizontalInput * speed);
+}
+</pre>
+
+
   
