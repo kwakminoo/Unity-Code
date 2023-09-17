@@ -300,5 +300,59 @@ void Update()
 }
 </pre>
 
+적이 플레이어를 쫓아 움직임
+-
+<pre>
+    public float speed = 3.0f;
+    private Rigidbody enemyRb;
+    private GameObject player;
+
+    void Start()
+    {
+        enemyRb = GetComponent<Rigidbody>();
+        player = GameObject.Find("Player");
+    }
+
+    void Update()
+    {
+        //normalized가 없으면 거리가 멀수록 가속도가 붙음, 있으면 정량화해 안붙음
+        Vector3 lookDirection = (player.transform.position - transform.position).normalized; 
+
+        enemyRb.AddForce(lookDirection * speed);
+    }
+</pre>
+
+적이 플레이어의 반경 n이터의 위치에서 무작위로 생성
+-
+<pre>
+    public GameObject enemyPrefabs;
+    //여기서는 n을 9로함, 즉 플레이어 반경 9미터의 위치를 뜻함
+    private float spawnRange = 9.0f;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+
+        Instantiate(enemyPrefabs, GenerateSpawnPosition() , enemyPrefabs.transform.rotation);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    private Vector3 GenerateSpawnPosition()
+    {
+        float spwanPosX = Random.Range(-spawnRange, spawnRange);
+        float spwanPosZ = Random.Range(-spawnRange, spawnRange);
+
+        Vector3 randomPos = new Vector3(spwanPosX, 0, spwanPosZ);
+
+        return randomPos;
+    }
+</pre>
+
 
   
