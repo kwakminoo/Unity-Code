@@ -1,5 +1,11 @@
 # Unity-3D Code
 
+for()과 if()의 차이
+-
+<pre>
+  for()은 몇번 반복할 것인지
+  if()는 참인지 거짓인지를 보고 실행이 됨
+</pre>
 
 플레이어 이동
 ------
@@ -178,9 +184,17 @@ void 오브젝트스폰이름()
 <code>
 void OnTriggerEnter(Collider.other)
   {
-    //충돌시 콜라이더가 지정된 오브젝트와 그 오브젝트와 부딛힌 오브젝트 둘다 파괴
-    Destroy.(gameObject);
-    Destroy.(other.gameObject);
+    //특정 오브젝트와 충솔시 삭제를 하고 싶으면 if문으로 테그를 찾아야 함
+    if(ohter.CompareTag("태그 이름"))
+    {
+      태그 이름 = true;
+  
+      //ohter.가 없으면 플레이어가, 있으면 다른 오브젝트가 삭제됨
+      Destroy.(gameObject);
+      Destroy.(other.gameObject);      
+    }
+    
+
   }
 </code>
 </pre>
@@ -354,5 +368,111 @@ void Update()
     }
 </pre>
 
-
+충돌시 넉백 효과
+-
+<pre>
+  private float powerUpStrenght = 10.0f;
   
+  private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Enemy") && hasPowerup)
+        {
+            //Enemy의 리지드바디를 가져옴
+            Rigidbody enemyRigidbody = collision.gameObject.GetComponent<Rigidbody>();
+            //충돌하면 어디로 가는지 방향을 정함
+            Vector3 awayFromPlayer = collision.gameObject.transform.position - transform.position;
+
+            //ForceMode.Impulse는 효과가 즉시 적용된다는 명령어이다
+            enemyRigidbody.AddForce(awayFromPlayer * powerUpStrenght, ForceMode.Impulse);
+            Debug.Log("Collided With: " + collision.gameObject.name + " with powerup set to " + hasPowerup);
+        }
+    }
+</pre>
+
+일정시간뒤 사라지는 카운트다운
+-
+<pre>
+  private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Powerup"))
+        {
+            hasPowerup = true;
+            Destroy(other.gameObject);
+            //태그("Powerup")를 얻으면 카운트다운(PowerupCountdownRoutine)을 시작한다
+            StartCoroutine(PowerupCountdownRoutine());
+        }
+    }
+
+    IEnumerator PowerupCountdownRoutine()
+    {
+        //7초타이머를 시작한 후 끝나면 밑에있는 동작을 실행한다
+        yield return new WaitForSeconds(7);
+        hasPowerup = false;
+    }
+</pre>
+
+버프 등의 시간제한 오브제를 표시
+-
+<pre>
+  public GameObject powerupIndicator;
+
+  void Update()
+    {
+        //오브제가 플레이어의 위치에서 y값 -0.5에 위치에서 따라다님
+        powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
+    }
+  
+  private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Powerup"))
+        {
+            //트리거("Powerup")이 활성화되면 계층창에 표시를 꺼두었던 오브제를 활성화함
+            powerupIndicator.gameObject.SetActive(true);
+        }
+    }
+
+    IEnumerator PowerupCountdownRoutine()
+    {
+        yield return new WaitForSeconds(7);
+        hasPowerup = false;
+        //7초가 끝나면 다시 오브제를 비활성화해 모습을 감춤
+        powerupIndicator.gameObject.SetActive(false);
+    }
+</pre>
+
+for문을 이용해 WAVE에 따라 무작위 위치에 적을 생성
+-
+<pre>
+  public GameObject enemyPrefabs;
+  public int waveNumber = 1;
+  
+  void Update()
+    {
+        enemyCount = FindObjectsOfType<Enemy>().Length;
+
+        if(enemyCount == 0)
+        {
+            waveNumber++;
+            SpawnEnemyWave(waveNumber);
+        }
+    }
+
+    void SpawnEnemyWave(int enemiesToSpawn)
+    {
+         for(int i = 0; i < enemiesToSpawn;  i++)
+        {
+            Instantiate(enemyPrefabs, GenerateSpawnPosition() , enemyPrefabs.transform.rotation);
+        }
+    }
+
+    private Vector3 GenerateSpawnPosition()
+    {
+        float spwanPosX = Random.Range(-spawnRange, spawnRange);
+        float spwanPosZ = Random.Range(-spawnRange, spawnRange);
+
+        Vector3 randomPos = new Vector3(spwanPosX, 0, spwanPosZ);
+
+        return randomPos;
+    }
+</pre>
+
