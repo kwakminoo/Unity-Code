@@ -220,7 +220,7 @@ void update()
 {
   if(Input.GetKeyDown(KeyCode.Space) && inOnGround)
     {
-      playerRbAddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+      playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
       isOnGround = false;
     }
 }
