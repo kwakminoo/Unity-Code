@@ -1,5 +1,14 @@
 # Unity-3D Code
 
+private와 public
+-
+<pre>
+  변수를 선언할 때 private는 그 cs안에서만 사용되는 변수, public은 다른 cs에서 불러도 사용 되도록 만드는 변수이다
+
+  오버라이드 변수를 선언할 때는 private나 public을 써주어야 하지만 커스텀 메소드에서는 구지 안 써줘도 된다
+  커스텀 메소드에 private나 public을 쓰지 않으면 자동적으로 cs가 private로 만든다
+</pre>
+
 for()과 if()의 차이
 -
 <pre>
@@ -475,4 +484,35 @@ for문을 이용해 WAVE에 따라 무작위 위치에 적을 생성
         return randomPos;
     }
 </pre>
+
+물체가 움직일 때 Rigidbody를 이용해 회전
+-
+<pre>
+  private Rigidbody targetRb;
+
+  void Start()
+    {
+        targetRb = GetComponent<Rigidbody>();
+        //Torque는 물체를 회전시키는 메소드
+        targetRb.AddTorque(x, y, z);
+    }
+</pre>
+
+List<> 선언
+-
+<pre>
+  public / private List<GameObject> 변수이름;
+</pre>
+
+마우스 클릭 선언
+-
+<pre>
+  //마우스 클릭은 스페이스나 다른 키와 다르게 정해진 오버라이드 변수이다
+    GetKey처럼 Donw, up을 쓸 수 있다
+  private void OnMouseDown()
+  {
+
+  }
+</pre>
+
 
