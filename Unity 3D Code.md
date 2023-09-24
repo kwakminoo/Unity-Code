@@ -515,4 +515,79 @@ List<> 선언
   }
 </pre>
 
+텍스트 메스 프로 사용해 클릭해 파괴한 오브젝트 점수 표현
+-
+<pre>
+  [Game Manager.cs]
+  
+  using TMPro;
 
+  public TextMeshProUGUI scoreText;
+  
+  void Start()
+    {
+        StartCoroutine(SpawnTarget());
+        score = 0;
+        UpdateScore(0);
+    }
+
+  public void UpdateScore(int scoreToAdd)
+    {
+        score += scoreToAdd;
+        scoreText.text = "Score:" + score;
+    }
+
+  [Target.cs]
+
+  public GameManager gameManager;
+
+  private void OnMouseDown()
+    {
+        Destroy(gameObject);
+        gameManager.UpdateScore(5);
+    }
+</pre>
+
+오브젝트를 클릭했을 때 오브젝트가 삭제되며 파티클효과 나타내기
+-
+<pre>
+  public ParticleSystem explosionParticle;
+
+  private void OnMouseDown()
+    {
+        Destroy(gameObject);
+        Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+        gameManager.UpdateScore(pointValue);
+    }
+</pre>
+
+게임 오버 메세지 출력과 씬 리셋
+-
+<pre>
+  using UnityEngine.SceneManagement;
+  using UnityEngine.UI;
+
+  public TextMeshProUGUI gameOvertext;
+  public Button restartButton;
+
+  void Start()
+    {
+        isGameActive = true;
+        score = 0;
+
+        StartCoroutine(SpawnTarget());
+        UpdateScore(0);
+    }
+  
+  public void GameOver()
+    {
+        restartButton.gameObject.SetActive(true);
+        gameOvertext.gameObject.SetActive(true);
+        isGameActive = false;
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+</pre>
