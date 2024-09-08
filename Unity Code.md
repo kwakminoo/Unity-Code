@@ -1,4 +1,4 @@
-# Unity-3D Code
+# Unity Code
 
 private와 public
 -
