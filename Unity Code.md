@@ -493,8 +493,10 @@ for문을 이용해 WAVE에 따라 무작위 위치에 적을 생성
   void Start()
     {
         targetRb = GetComponent<Rigidbody>();
-        //Torque는 물체를 회전시키는 메소드
-        targetRb.AddTorque(x, y, z);
+        //Force는 물체가 받는 힘, Vector뒤에 up은 물체가 받는 힘의 방향, 받는 힘은 12에서 16사이의 힘을 받고 받는 힘을 바로 적용해야 하니 ForceMode중 Impulse를 사용 
+        targetRb.AddForce(Vector3.up * Random.Range(12, 16), ForceMode.Impulse);
+        //Torque는 물체를 회전시키는 메소드고 각각 x,y,z,방향으로 회전하는 힘이 적용된다 동일하게 힘이 바로 적용되도록 Impulse를 사용
+        targetRb.AddTorque(Random.Range(-10, 10), Random.Range(-10, 10) , Random.Range(-10, 10), ForceMode.Impulse );
     }
 </pre>
 
