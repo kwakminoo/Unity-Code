@@ -504,6 +504,29 @@ List<> 선언
 -
 <pre>
   public / private List<GameObject> 변수이름;
+
+public class GameManager : MonoBehaviour
+{
+    // '타겟'오브젝트를 리스트로 모아둠
+    public List<GameObject> targets;
+    //스폰시간은 1프레임(1초)
+    public float SpawnRate = 1.0f;
+    void Start()
+    {
+        //코루틴을 시작한다
+        StartCoroutine(SpawnTarget());   
+    }
+
+    IEnumerator SpawnTarget()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(SpawnRate);
+            //인덱스에 0부터 '타겟'오브젝트에 설정한 수까지를 랜덤으로 넣음
+            int index = Random.Range(0, targets.Count);
+            Instantiate(targets[index]);
+        }
+    } 
 </pre>
 
 마우스 클릭 선언
@@ -593,3 +616,22 @@ List<> 선언
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 </pre>
+
+
+Coroutine
+---------------
+특정 시간 간격으로 반복 실행하거나, 비동기 작업을 처리할 때 유용하게 사용됩니다
+
+1. 일시 중지 및 재개: 코루틴은 특정 조건이 충족될 때까지 실행을 일시 중지할 수 있으며, 이후에 다시 실행을 재개할 수 있습니다. 이를 통해 긴 작업을 여러 프레임에 걸쳐 나눠서 실행할 수 있습니다.<br>
+2. IEnumerator 반환형: 코루틴 메서드는 IEnumerator를 반환해야 합니다. 이 반환형은 유니티 엔진이 코루틴의 실행을 관리하는 데 사용됩니다.<br>
+3.yield 문: yield return 문을 사용하여 코루틴의 실행을 일시 중지할 수 있습니다. yield return null은 다음 프레임까지 실행을 일시 중지하고, yield return new WaitForSeconds(1f)는 1초 후에 실행을 재개합니다.
+
+
+
+
+
+
+
+
+
+
