@@ -591,7 +591,7 @@ public class GameManager : MonoBehaviour
 <pre>
   using UnityEngine.SceneManagement;
   using UnityEngine.UI;
-
+  //게임메니저에 퍼블릭으로 변수를 만들었으면 꼭 게임메니저 오브젝트의 인스펙터 창에서 연결을 시켜줘야함
   public TextMeshProUGUI gameOvertext;
   public Button restartButton;
 
@@ -613,6 +613,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
+        //넘어갈 씬을 네임스페이스로 찾겠다는 메소드
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 </pre>
