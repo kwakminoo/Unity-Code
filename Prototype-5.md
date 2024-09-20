@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     //타겟이란 변수를 리시트로 묶음
     public List<GameObject> targets;
     public float SpawnRate = 1.0f;
+    //Time.daltatime은 float값만을 허용
     private float timeLeft = 60.0f;
     private int score;
     public TextMeshProUGUI scoreText;
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
 
    void Update()
    {
+        //만약 isGameActive일 때만 카운트다운을 실행
        if(isGameActive)
        {
            timeLimeat();
@@ -46,6 +48,7 @@ public class GameManager : MonoBehaviour
    void timeLimeat()
    {
        timeLeft -= Time.deltaTime;
+        //실수 값인 timeLeft를 Mathf.Round를 통해 정수값만 표현
        timeText.text = "Time: " + Mathf.Round(timeLeft);
        if(timeLeft < 0)
        {
