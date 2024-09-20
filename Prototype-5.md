@@ -13,8 +13,10 @@ public class GameManager : MonoBehaviour
     //타겟이란 변수를 리시트로 묶음
     public List<GameObject> targets;
     public float SpawnRate = 1.0f;
+    private float timeLeft = 60.0f;
     private int score;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI TimeText;
     public TextMeshProUGUI gameOverText;
     public bool isGameActive;
     public Button restartButton;
@@ -30,6 +32,26 @@ public class GameManager : MonoBehaviour
         UpdateScore(0);
         titleScreen.SetActive(false);
     }
+
+   void Update()
+   {
+       if(isGameActive)
+       {
+           timeLimeat();
+       }
+      
+   }
+
+
+   void timeLimeat()
+   {
+       timeLeft -= Time.deltaTime;
+       timeText.text = "Time: " + Mathf.Round(timeLeft);
+       if(timeLeft < 0)
+       {
+           GameOver();
+       }
+   }
 
     public void RestartGame()
     {
