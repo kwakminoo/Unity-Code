@@ -627,9 +627,34 @@ Coroutine
 2. IEnumerator 반환형: 코루틴 메서드는 IEnumerator를 반환해야 합니다. 이 반환형은 유니티 엔진이 코루틴의 실행을 관리하는 데 사용됩니다.<br>
 3.yield 문: yield return 문을 사용하여 코루틴의 실행을 일시 중지할 수 있습니다. yield return null은 다음 프레임까지 실행을 일시 중지하고, yield return new WaitForSeconds(1f)는 1초 후에 실행을 재개합니다.
 
+<>와 []
+------------
+* <>는 리스트고 []는 배열이다
 
+public / private / const / protected / readonly / static / [SerializeField]
+--------
+* const: constant의 약자로 public/private 뒤에 선언하면 그 변수의 값을 절대로 바꿀 수 없게 된다<br>
+ex) private const float speed = 10; //const를 사용하면 어떤 지역에서도 speed의 값을 10에서 변경이 불가능하다<br>
+* protected : private + public , 이 스크립트, 이 클래스에서 변수를 사용할 수 있지만, 이 클래스를 상속받는 다른 스크립트 에서도 사용할 수 있다. 현재클래스 외부의 변수나 메서드를 볼수 있다. 하지만 이는 이 메인 클레스에서 상속받는 스크립트나 클래스에만 해당한다.<br>
+* readonly : 처음으로 오브젝트에 Instantiate() 를 적용 할 때, 해당 오브젝트를 만들때 변수를 설정할 수 있지만, 그 변수를 다시 변경 할 수는 없다.<br>
+* static : 코드 어디든 전역변수를 넣을 수 있다.<br>
+* [SerializeField]: 인스펙터창에 표시되지 않는 private 변수들을 인스펙터 창에 표시해 그 지역 내에서만 변경하며 사용하도록 설정해주는 메소드이다<br>
+ex) 만약 같은 playerContoller라는 스크립트를 사용하는 A와 B에서 A의 속도만 바꾸고 싶다면 [SerializeField]를 설정하고 A의 인스펙터창에서 값을 변경하면 된다<br>
 
-
+유니티 퀴즈 오답노트!
+----
+* bool값은 기본적으로 false상태이다
+* 정답은 100(99이하일때 실행되는 조건이기에 그렇다는데 솔직히 잘 모르겠음;; 아마 99'이하'일때 니까 99에서도 +1해서 100인듯함)
+~~~C#
+int count = 0;
+void OnMouseDrag()
+{
+  if(count < 100)
+  {
+    count++
+  }
+}
+~~~
 
 
 
