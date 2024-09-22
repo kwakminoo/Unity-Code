@@ -641,6 +641,32 @@ ex) private const float speed = 10; //const를 사용하면 어떤 지역에서�
 * [SerializeField]: 인스펙터창에 표시되지 않는 private 변수들을 인스펙터 창에 표시해 그 지역 내에서만 변경하며 사용하도록 설정해주는 메소드이다<br>
 ex) 만약 같은 playerContoller라는 스크립트를 사용하는 A와 B에서 A의 속도만 바꾸고 싶다면 [SerializeField]를 설정하고 A의 인스펙터창에서 값을 변경하면 된다<br>
 
+Fixed/Late Update
+--------
+* FixedUpdate: 움직임이나 물리를 계산할 때 사용됨
+* LateUpdate: 플레이어를 따라가는 카메라에 많이 사용됨
+
+Awake
+----
+* Awake: 게임이 시작될 때가 아니라 오브젝트가 동작하는 경우에 많이 사용함
+ex) 누군가 버튼을 누루면 벽이 어떤 동작을 수행할 때
+
+Exsit Package
+-
+게임을 페키지 형태로내볼때 file 에서 누루면 됨
+
+오브젝트 풀링
+----------
+* 오브젝트 풀링: 오브젝트를 특정 개수 만큼 선택하여 온오프 할 수 있음
+
+제작하는 프로그램의 모듈을 선택
+-
+1. 제작할 프로젝트를 연다
+2. file > Build Settings > Add Open Scenes로 씬을 추가
+3. Player Settings에서 원하는 설정을 조정
+4. Build를 클릭
+5. Platform에는 윈도우, 안드로이드. 플스 등등이 있다
+
 유니티 퀴즈 오답노트!
 ----
 * bool값은 기본적으로 false상태이다
