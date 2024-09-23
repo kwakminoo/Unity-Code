@@ -77,11 +77,16 @@ void Update()
 -----------
 <pre>
 <code>
+public float xRange = ;
+public float yRange = ;
+public float zRange = ;
+
 void Update()
   {
-    if (transform.position 축 < 위치)
+    if (transform.position.축 < ?Range)
       {
        //위치를 고정하고 싶으면 transform.position.축 대신 고정하고 싶은 위치를 적으면 그 위치 밖으로 못감
+         transform.position.?칸에 ?Range가 들어가면 됨
        transfrom.position = new Vector3(transfrom.position.x,  transfrom.position.y, transfrom.position.z);
       }
   }
