@@ -20,6 +20,7 @@ for()과 if()의 차이
 ------
 <pre>
 <code>
+[SerializeField] private float horsePower = 0;
 private float speed;
 private float turnspeed;
 private float horizontalInput;
@@ -31,6 +32,15 @@ void Update()
   horizontalInput = Input.GetAxis("Horizontal");
   forwardInput = Input.GetAxis("Vertical");
 
+  /1. 
+  //가해지는 힘만큼 이동속도가 올라감, Local을 사용해야 플레이어가 바라보는 방향으로 힘이 가해지는데 Local을 사용할려면 AddRelativeForce를 사용해야함, Global을 누루면 Local로 변함
+  playerRb.AddRelativeForce(Vector3.forward * horsePower * verticalInput);
+  //만약 플레이어나 탈것이 이동중 기울어지는 형상이 있다면 물리엔진에 중력원점을 낮추거나 변경해야한다
+  
+  
+
+  
+  /2.
   //Vecrtor3.forward는 앞 뒤로, Vector3.Up은 양 옆으로 회전
   transform.Translate(Vector3.forward * Time.deltaTime * speed * forwardInput);
   //양 옆을 이동하는 속도를 다르게 할려면 앞뒤 이동 속도 변수와 양옆 이동 속도 변수를 따로 생성해야함
