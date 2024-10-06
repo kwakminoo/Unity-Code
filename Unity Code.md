@@ -682,6 +682,10 @@ Exsit Package
 4. Build를 클릭
 5. Platform에는 윈도우, 안드로이드. 플스 등등이 있다
 
+Vector
+-
+* Vector뒤에 오는 숫자는 저장할 수 있는 숫자 값이다 만약 2D게임이라면 Vector2, 3D게임이라면 Vector3가 적절하다
+
 유니티 퀴즈 오답노트!
 ----
 * bool값은 기본적으로 false상태이다
