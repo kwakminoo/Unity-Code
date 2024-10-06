@@ -19,6 +19,31 @@ for()과 if()의 차이
 플레이어 이동
 ------
 <pre>
+* InputSystem을 이용하는 방법
+<code>
+using UnityEngine.InputSystem;
+  
+void Update()
+(
+  
+    float horizontal = 0.0f;
+    if (Keyboard.current.leftArrowKey.isPressed)
+    {
+        horizontal = -1.0f;
+ 	    }
+    else if (Keyboard.current.rightArrowKey.isPressed)
+    {
+        horizontal = 1.0f;
+    }
+    Debug.Log(horizontal);
+
+    Vector2 position = transform.position;
+    position.x = position.x + 0.1f * horizontal;
+    transform.position = position;
+)
+</code>
+  
+* 코드를 이용해 불러오는 방법  
 <code>
 [SerializeField] private float horsePower = 0;
 private float speed;
