@@ -25,7 +25,7 @@ using UnityEngine.InputSystem;
   
 void Update()
 (
-  
+    //
     float horizontal = 0.0f;
     if (Keyboard.current.leftArrowKey.isPressed)
     {
@@ -37,10 +37,53 @@ void Update()
     }
     Debug.Log(horizontal);
 
+    float vertical = 0.0;
+    if(Keyboard.current.upArrowKey.isPressed)
+    {
+        vertical = 1.0f;
+    }
+    else if(Keyboard.current.downArrowKey.isPressed)
+    {
+        vertical = -1.0f;
+    }
+
     Vector2 position = transform.position;
     position.x = position.x + 0.1f * horizontal;
+    position.x = position.x + 0.1f * vertical;
     transform.position = position;
 )
+</code>
+
+* Left Action을 이용해 바운딩을하고 프레임 시간별로 적용
+<code>
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+
+public class PlayerController : MonoBehaviour
+{
+  public InputAction MoveAction;
+
+
+  // Start is called before the first frame update
+  void Start()
+  {
+     MoveAction.Enable();   
+  }
+ 
+  // Update is called once per frame
+  void Update()
+  {
+     Vector2 move = MoveAction.ReadValue<Vector2>();
+     Debug.Log(move);
+      Vector2 position = (Vector2)transform.position + move * 3.0f * Time.deltaTime;
+     transform.position = position;
+  }
+
+
+}
 </code>
   
 * 코드를 이용해 불러오는 방법  
