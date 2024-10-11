@@ -1,5 +1,12 @@
 # Unity Code
 
+using.[]
+-
+<pre>
+Yarn.Unity: 얀 스크립트 변수를 C#으로 변환해 사용가능
+UnityEngine.UI: 이미지 등의 UI 변수를 사용 가능
+</pre>
+
 private와 public
 -
 <pre>
